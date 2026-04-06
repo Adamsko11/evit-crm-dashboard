@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
-import { TrendingUp, Users, Calendar, DollarSign, Target, ArrowUpRight, ArrowDownRight, Activity, Award, Clock, Loader2 } from "lucide-react"
+import { TrendingUp, Users, Calendar, DollarSign, Target, ArrowUpRight, ArrowDownRight, Activity, Award, Clock, Loader2, Linkedin, Send, MessageSquare, UserCheck, Globe, ExternalLink } from "lucide-react"
+import { AreaChart, Area, LineChart, Line } from "recharts"
 
 const C = {
   primary: "#2563eb", secondary: "#7c3aed", success: "#10b981",
@@ -42,21 +43,24 @@ function Tip({ active, payload, label }) {
 export default function Dashboard() {
   const [tab, setTab] = useState("overview")
   const [data, setData] = useState(null)
+  const [linkedinData, setLinkedinData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch('/api/hubspot')
-      .then(r => r.json())
-      .then(d => {
-        if (d.error) throw new Error(d.error)
-        setData(d)
-        setLoading(false)
-      })
-      .catch(e => { setError(e.message); setLoading(false) })
+    Promise.all([
+      fetch('/api/hubspot').then(r => r.json()),
+      fetch('/api/linkedin').then(r => r.json()).catch(() => null)
+    ]).then(([hs, li]) => {
+      if (hs.error) throw new Error(hs.error)
+      setData(hs)
+      setLinkedinData(li)
+      setLoading(false)
+    }).catch(e => { setError(e.message); setLoading(false) })
   }, [])
 
-  const tabs = [{ id: "overview", label: "Overview" }, { id: "pipeline", label: "Pipeline" }, { id: "meetings", label: "Meetings" }, { id: "conversions", label: "Conversions" }]
+  const tabs = [{ id: "overview", label: "Overview" }, { id: "pipeline", label: "Pipeline" }, { id: "linkedin", label: "LinkedIn" }, { id: "meetings", label: "Meetings" }, { id: "conversions", label: "Conversions" }]
+  const li = linkedinData
 
   if (loading) {
     return (
@@ -188,6 +192,143 @@ export default function Dashboard() {
         )}
       </>)}
 
+      {tab === "linkedin" && li && (<>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <KPICard icon={Users} label="Total Network" value={li.totalConnections?.toLocaleString()} sub={`+${li.newLast7Days} this week · +${li.newLast30Days} this month`} color={C.primary} trend={`${li.newLast30Days} new in 30d`} up />
+          <KPICard icon={Target} label="ICP Matches" value={li.icpMatchCount?.toLocaleString()} sub={`${li.icpMatchRate}% of network`} color={C.success} trend="IT/Tech + Decision Maker" up />
+          <KPICard icon={Send} label="Invites Sent" value={li.totalInvitationsSent?.toLocaleString()} sub={`${li.acceptanceRate30d}% acceptance (30d)`} color={C.warning} trend={`${li.totalInvitationsReceived} received`} up />
+          <KPICard icon={MessageSquare} label="Messages" value={li.totalMessages?.toLocaleString()} sub={`${li.messagesSent?.toLocaleString()} sent · ${li.uniqueConversations?.toLocaleString()} conversations`} color={C.secondary} />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+            <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Network Growth</h2>
+            <p className="text-xs mb-4" style={{ color: C.muted }}>New connections per month</p>
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={li.monthlyGrowth}>
+                <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
+                <XAxis dataKey="month" tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
+                <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
+                <Tooltip content={<Tip />} />
+                <Bar dataKey="connections" name="New Connections" fill={C.primary} radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+            <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Outreach Activity</h2>
+            <p className="text-xs mb-4" style={{ color: C.muted }}>Weekly invitation requests sent vs received</p>
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={li.outreachWeekly}>
+                <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
+                <XAxis dataKey="week" tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} />
+                <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
+                <Tooltip content={<Tip />} />
+                <Legend wrapperStyle={{ fontSize: 12, color: C.muted }} />
+                <Bar dataKey="sent" name="Sent" fill={C.warning} radius={[4, 4, 0, 0]} />
+                <Bar dataKey="received" name="Received" fill={C.info} radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+            <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Decision Maker Seniority</h2>
+            <p className="text-xs mb-4" style={{ color: C.muted }}>{li.decisionMakers?.toLocaleString()} decision makers ({li.decisionMakerRate}% of network)</p>
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={li.seniorityBreakdown} layout="vertical" margin={{ left: 10, right: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke={C.border} horizontal={false} />
+                <XAxis type="number" tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
+                <YAxis type="category" dataKey="name" tick={{ fill: C.muted, fontSize: 11 }} width={80} axisLine={false} />
+                <Tooltip content={<Tip />} />
+                <Bar dataKey="value" name="Connections" radius={[0, 6, 6, 0]}>
+                  {li.seniorityBreakdown?.map((_, i) => <Cell key={i} fill={CC[i % CC.length]} />)}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+            <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Messaging Activity</h2>
+            <p className="text-xs mb-4" style={{ color: C.muted }}>Messages sent vs received per month</p>
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={li.messageMonthly}>
+                <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
+                <XAxis dataKey="month" tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
+                <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
+                <Tooltip content={<Tip />} />
+                <Legend wrapperStyle={{ fontSize: 12, color: C.muted }} />
+                <Bar dataKey="sent" name="Sent" fill={C.primary} radius={[4, 4, 0, 0]} />
+                <Bar dataKey="received" name="Received" fill={C.secondary} radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+            <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Top Companies in Network</h2>
+            <p className="text-xs mb-4" style={{ color: C.muted }}>Companies with most connections (excl. freelance/self-employed)</p>
+            <div className="space-y-1.5">
+              {li.topCompanies?.slice(0, 12).map((c, i) => (
+                <div key={i} className="flex items-center justify-between py-1.5 px-3 rounded-lg" style={{ background: i < 3 ? `${C.primary}10` : 'transparent' }}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono w-5 text-right" style={{ color: C.muted }}>{i + 1}</span>
+                    <span className="text-sm" style={{ color: C.text }}>{c.name}</span>
+                  </div>
+                  <span className="text-sm font-semibold" style={{ color: C.primary }}>{c.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+            <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Recent ICP Matches</h2>
+            <p className="text-xs mb-4" style={{ color: C.muted }}>IT/Tech decision makers connected in last 30 days</p>
+            <div className="space-y-1">
+              {li.recentICPMatches?.map((m, i) => (
+                <a key={i} href={m.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 px-3 rounded-lg hover:opacity-80 transition-opacity" style={{ background: `${C.success}08` }}>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-medium truncate" style={{ color: C.text }}>{m.name}</p>
+                      <ExternalLink size={10} style={{ color: C.muted, flexShrink: 0 }} />
+                    </div>
+                    <p className="text-xs truncate" style={{ color: C.muted }}>{m.position} @ {m.company}</p>
+                  </div>
+                  <span className="text-xs ml-2 flex-shrink-0" style={{ color: C.muted }}>{m.connected}</span>
+                </a>
+              ))}
+              {(!li.recentICPMatches || li.recentICPMatches.length === 0) && <p className="text-sm py-4 text-center" style={{ color: C.muted }}>No recent ICP matches</p>}
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+          <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Weekly Connection Growth</h2>
+          <p className="text-xs mb-4" style={{ color: C.muted }}>Last 10 weeks trend</p>
+          <ResponsiveContainer width="100%" height={180}>
+            <AreaChart data={li.weeklyGrowth}>
+              <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
+              <XAxis dataKey="week" tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} />
+              <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
+              <Tooltip content={<Tip />} />
+              <Area type="monotone" dataKey="connections" name="Connections" stroke={C.primary} fill={`${C.primary}30`} strokeWidth={2} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="mt-4 rounded-lg px-4 py-3 text-xs" style={{ background: `${C.info}10`, color: C.muted }}>
+          <Linkedin size={14} className="inline mr-1.5" style={{ color: C.info }} />
+          LinkedIn data last updated: {li.updatedAt} · Upload a new LinkedIn export to refresh
+        </div>
+      </>)}
+
+      {tab === "linkedin" && !li && (
+        <div className="rounded-xl p-8 text-center" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+          <Linkedin size={40} className="mx-auto mb-4" style={{ color: C.muted }} />
+          <h2 className="text-lg font-semibold mb-2" style={{ color: C.text }}>LinkedIn Data</h2>
+          <p className="text-sm" style={{ color: C.muted }}>No LinkedIn data loaded. Upload a LinkedIn data export to see analytics.</p>
+        </div>
+      )}
+
       {tab === "meetings" && (<>
         <div className="rounded-xl p-8 text-center" style={{ background: C.card, border: `1px solid ${C.border}` }}>
           <Calendar size={40} className="mx-auto mb-4" style={{ color: C.muted }} />
@@ -210,7 +351,7 @@ export default function Dashboard() {
         </div>
       </>)}
 
-      <div className="mt-6 pt-4 text-center text-xs" style={{ borderTop: `1px solid ${C.border}`, color: C.muted }}>EVIT Organization &middot; Sales Dashboard v2.0 &middot; Live from HubSpot &middot; Auto-refreshes on load</div>
+      <div className="mt-6 pt-4 text-center text-xs" style={{ borderTop: `1px solid ${C.border}`, color: C.muted }}>EVIT Organization &middot; Sales Dashboard v3.0 &middot; Live from HubSpot + LinkedIn &middot; Auto-refreshes on load</div>
     </div>
   )
 }

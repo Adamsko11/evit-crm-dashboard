@@ -1,0 +1,417 @@
+{
+  "totalConnections": 9981,
+  "newLast7Days": 38,
+  "newLast30Days": 201,
+  "icpMatchCount": 1431,
+  "icpMatchRate": 14.3,
+  "decisionMakers": 5314,
+  "decisionMakerRate": 53.2,
+  "totalMessages": 29223,
+  "messagesSent": 17222,
+  "uniqueConversations": 7224,
+  "totalInvitationsSent": 1316,
+  "totalInvitationsReceived": 1719,
+  "acceptanceRate30d": 65.0,
+  "monthlyGrowth": [
+    {
+      "month": "2025-05",
+      "connections": 104
+    },
+    {
+      "month": "2025-06",
+      "connections": 67
+    },
+    {
+      "month": "2025-07",
+      "connections": 409
+    },
+    {
+      "month": "2025-08",
+      "connections": 162
+    },
+    {
+      "month": "2025-09",
+      "connections": 1356
+    },
+    {
+      "month": "2025-10",
+      "connections": 1164
+    },
+    {
+      "month": "2025-11",
+      "connections": 360
+    },
+    {
+      "month": "2025-12",
+      "connections": 132
+    },
+    {
+      "month": "2026-01",
+      "connections": 494
+    },
+    {
+      "month": "2026-02",
+      "connections": 125
+    },
+    {
+      "month": "2026-03",
+      "connections": 205
+    },
+    {
+      "month": "2026-04",
+      "connections": 28
+    }
+  ],
+  "weeklyGrowth": [
+    {
+      "week": "2026-01-26",
+      "connections": 51
+    },
+    {
+      "week": "2026-02-02",
+      "connections": 15
+    },
+    {
+      "week": "2026-02-09",
+      "connections": 51
+    },
+    {
+      "week": "2026-02-16",
+      "connections": 25
+    },
+    {
+      "week": "2026-02-23",
+      "connections": 33
+    },
+    {
+      "week": "2026-03-02",
+      "connections": 33
+    },
+    {
+      "week": "2026-03-09",
+      "connections": 45
+    },
+    {
+      "week": "2026-03-16",
+      "connections": 45
+    },
+    {
+      "week": "2026-03-23",
+      "connections": 70
+    },
+    {
+      "week": "2026-03-30",
+      "connections": 38
+    }
+  ],
+  "seniorityBreakdown": [
+    {
+      "name": "CTO",
+      "value": 1235
+    },
+    {
+      "name": "CEO",
+      "value": 1118
+    },
+    {
+      "name": "Founder",
+      "value": 861
+    },
+    {
+      "name": "Head/VP",
+      "value": 640
+    },
+    {
+      "name": "Partner",
+      "value": 279
+    },
+    {
+      "name": "Owner",
+      "value": 116
+    },
+    {
+      "name": "COO/CFO",
+      "value": 89
+    },
+    {
+      "name": "Manager",
+      "value": 50
+    },
+    {
+      "name": "President",
+      "value": 25
+    }
+  ],
+  "topCompanies": [
+    {
+      "name": "CMC Global Company Limited.",
+      "value": 41
+    },
+    {
+      "name": "SmartDev",
+      "value": 21
+    },
+    {
+      "name": "Savvycom - Software Product Development",
+      "value": 17
+    },
+    {
+      "name": "FPT Software",
+      "value": 17
+    },
+    {
+      "name": "SOTATEK., JSC",
+      "value": 16
+    },
+    {
+      "name": "NTQ Solution JSC",
+      "value": 16
+    },
+    {
+      "name": "Vivasoft Limited",
+      "value": 14
+    },
+    {
+      "name": "MOR Software JSC",
+      "value": 11
+    },
+    {
+      "name": "Microsoft",
+      "value": 11
+    },
+    {
+      "name": "Tata Consultancy Services",
+      "value": 11
+    },
+    {
+      "name": "Google",
+      "value": 11
+    },
+    {
+      "name": "Systems Limited",
+      "value": 10
+    },
+    {
+      "name": "GRADION",
+      "value": 10
+    },
+    {
+      "name": "IBM",
+      "value": 9
+    },
+    {
+      "name": "Accenture",
+      "value": 9
+    }
+  ],
+  "outreachWeekly": [
+    {
+      "week": "2026-01-26",
+      "sent": 202,
+      "received": 7
+    },
+    {
+      "week": "2026-02-02",
+      "sent": 19,
+      "received": 5
+    },
+    {
+      "week": "2026-02-09",
+      "sent": 50,
+      "received": 31
+    },
+    {
+      "week": "2026-02-16",
+      "sent": 7,
+      "received": 9
+    },
+    {
+      "week": "2026-02-23",
+      "sent": 81,
+      "received": 12
+    },
+    {
+      "week": "2026-03-02",
+      "sent": 53,
+      "received": 12
+    },
+    {
+      "week": "2026-03-09",
+      "sent": 67,
+      "received": 12
+    },
+    {
+      "week": "2026-03-16",
+      "sent": 87,
+      "received": 17
+    },
+    {
+      "week": "2026-03-23",
+      "sent": 96,
+      "received": 43
+    },
+    {
+      "week": "2026-03-30",
+      "sent": 49,
+      "received": 8
+    }
+  ],
+  "messageMonthly": [
+    {
+      "month": "2025-09",
+      "total": 1421,
+      "sent": 355,
+      "received": 1066
+    },
+    {
+      "month": "2025-10",
+      "total": 1571,
+      "sent": 549,
+      "received": 1022
+    },
+    {
+      "month": "2025-11",
+      "total": 823,
+      "sent": 333,
+      "received": 490
+    },
+    {
+      "month": "2025-12",
+      "total": 424,
+      "sent": 146,
+      "received": 278
+    },
+    {
+      "month": "2026-01",
+      "total": 808,
+      "sent": 452,
+      "received": 356
+    },
+    {
+      "month": "2026-02",
+      "total": 481,
+      "sent": 273,
+      "received": 208
+    },
+    {
+      "month": "2026-03",
+      "total": 843,
+      "sent": 436,
+      "received": 407
+    },
+    {
+      "month": "2026-04",
+      "total": 80,
+      "sent": 44,
+      "received": 36
+    }
+  ],
+  "recentICPMatches": [
+    {
+      "name": "Mamun Morshed",
+      "company": "Audacity IT Solutions Limited",
+      "position": "Chief Executive Officer",
+      "connected": "04 Apr 2026",
+      "url": "https://www.linkedin.com/in/mamun-morshed"
+    },
+    {
+      "name": "Manzurul Karim",
+      "company": "Fronture Technologies Limited",
+      "position": "Managing Director",
+      "connected": "03 Apr 2026",
+      "url": "https://www.linkedin.com/in/manzurulkarim"
+    },
+    {
+      "name": "Ashraf Uddin",
+      "company": "Enosis Solutions",
+      "position": "Chief Technology Officer",
+      "connected": "03 Apr 2026",
+      "url": "https://www.linkedin.com/in/ashraf-uddin-71945b14"
+    },
+    {
+      "name": "Achala Weerasooriya",
+      "company": "LiveRoom Technologies",
+      "position": "Chief Executive Officer",
+      "connected": "02 Apr 2026",
+      "url": "https://www.linkedin.com/in/achalaweerasooriya"
+    },
+    {
+      "name": "Bahauddin Arafat",
+      "company": "Zaag Systems Ltd.",
+      "position": "Co-Founder & CEO",
+      "connected": "02 Apr 2026",
+      "url": "https://www.linkedin.com/in/bahauddinarafat"
+    },
+    {
+      "name": "Kumaril Patel",
+      "company": "Sapphire Software Solutions",
+      "position": "Founder & CEO",
+      "connected": "01 Apr 2026",
+      "url": "https://www.linkedin.com/in/kumarilpatel"
+    },
+    {
+      "name": "Roshni Fernando",
+      "company": "hSenid Mobile Solutions (Pvt) Ltd",
+      "position": "General Manager",
+      "connected": "01 Apr 2026",
+      "url": "https://www.linkedin.com/in/roshnifernando"
+    },
+    {
+      "name": "Rakesh Jinabhai",
+      "company": "Scale Shore Consulting",
+      "position": "Global Enterprise Director",
+      "connected": "01 Apr 2026",
+      "url": "https://www.linkedin.com/in/rakeshjinabhai"
+    },
+    {
+      "name": "Ransilu Koralege",
+      "company": "Era Biz Solutions",
+      "position": "Chief Executive Officer",
+      "connected": "31 Mar 2026",
+      "url": "https://www.linkedin.com/in/ransilu"
+    },
+    {
+      "name": "Krishna Dewda",
+      "company": "CloudYuga Software Services",
+      "position": "Co-Founder",
+      "connected": "31 Mar 2026",
+      "url": "https://www.linkedin.com/in/krishnakdewda"
+    },
+    {
+      "name": "Monirul Islam",
+      "company": "Advanced Software Development",
+      "position": "Ower & Director Marketng",
+      "connected": "31 Mar 2026",
+      "url": "https://www.linkedin.com/in/monirul-islam-258b5222"
+    },
+    {
+      "name": "Chuong Kha Nguyen",
+      "company": "DevUP Technology Academy",
+      "position": "Chief Executive Officer",
+      "connected": "30 Mar 2026",
+      "url": "https://www.linkedin.com/in/khachuong"
+    },
+    {
+      "name": "Quang Tran",
+      "company": "Renova Cloud",
+      "position": "COO & CCO",
+      "connected": "29 Mar 2026",
+      "url": "https://www.linkedin.com/in/quang-tran-70529635a"
+    },
+    {
+      "name": "Suhas Hiwale",
+      "company": "SAI-Digital",
+      "position": "CEO",
+      "connected": "28 Mar 2026",
+      "url": "https://www.linkedin.com/in/suhas-hiwale-2967a9"
+    },
+    {
+      "name": "David Darmstandler",
+      "company": "Datapath",
+      "position": "Co-CEO and Co-Founder",
+      "connected": "27 Mar 2026",
+      "url": "https://www.linkedin.com/in/darmstandler"
+    }
+  ],
+  "updatedAt": "2026-04-06"
+}
