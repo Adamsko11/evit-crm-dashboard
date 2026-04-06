@@ -46,6 +46,7 @@ export default function Dashboard() {
   const [linkedinData, setLinkedinData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [dateRange, setDateRange] = useState({ start: "", end: "" })
 
   useEffect(() => {
     Promise.all([
@@ -90,6 +91,59 @@ export default function Dashboard() {
 
   const syncDate = new Date(syncedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
   const syncTime = new Date(syncedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+
+  // LinkedIn date filtering
+  const filterLinkedinData = (data, startDate, endDate) => {
+    if (!data || (!startDate && !endDate)) return data
+
+    const filtered = { ...data }
+    const start = startDate ? new Date(startDate) : null
+    const end = endDate ? new Date(endDate) : null
+
+    // Filter monthly growth
+    if (filtered.monthlyGrowth) {
+      filtered.monthlyGrowth = filtered.monthlyGrowth.filter(item => {
+        const itemDate = new Date(item.month + "-01")
+        if (start && itemDate < start) return false
+        if (end && itemDate > end) return false
+        return true
+      })
+    }
+
+    // Filter weekly growth
+    if (filtered.weeklyGrowth) {
+      filtered.weeklyGrowth = filtered.weeklyGrowth.filter(item => {
+        const itemDate = new Date(item.week)
+        if (start && itemDate < start) return false
+        if (end && itemDate > end) return false
+        return true
+      })
+    }
+
+    // Filter messaging activity
+    if (filtered.messageMonthly) {
+      filtered.messageMonthly = filtered.messageMonthly.filter(item => {
+        const itemDate = new Date(item.month + "-01")
+        if (start && itemDate < start) return false
+        if (end && itemDate > end) return false
+        return true
+      })
+    }
+
+    // Filter outreach weekly
+    if (filtered.outreachWeekly) {
+      filtered.outreachWeekly = filtered.outreachWeekly.filter(item => {
+        const itemDate = new Date(item.week)
+        if (start && itemDate < start) return false
+        if (end && itemDate > end) return false
+        return true
+      })
+    }
+
+    return filtered
+  }
+
+  const filteredLi = filterLinkedinData(li, dateRange.start, dateRange.end)
 
   const discoveryPlus = funnelData.find(f => f.name === 'Discovery+')?.value || 0
   const brainstormPlus = funnelData.find(f => f.name === 'Brainstorming+')?.value || 0
@@ -193,6 +247,19 @@ export default function Dashboard() {
       </>)}
 
       {tab === "linkedin" && li && (<>
+        <div className="rounded-xl p-4 mb-6" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+          <div className="flex flex-col md:flex-row items-start md:items-end gap-4">
+            <div className="flex-1">
+              <label style={{ color: C.muted }} className="text-xs font-medium uppercase tracking-wider block mb-2">Filter by Date Range</label>
+              <div className="flex gap-2">
+                <input type="date" value={dateRange.start} onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })} className="flex-1 px-3 py-2 rounded-lg text-sm" style={{ background: C.bg, border: `1px solid ${C.border}`, color: C.text }} placeholder="Start date" />
+                <input type="date" value={dateRange.end} onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })} className="flex-1 px-3 py-2 rounded-lg text-sm" style={{ background: C.bg, border: `1px solid ${C.border}`, color: C.text }} placeholder="End date" />
+              </div>
+            </div>
+            {(dateRange.start || dateRange.end) && <button onClick={() => setDateRange({ start: "", end: "" })} className="px-3 py-2 rounded-lg text-xs font-medium" style={{ background: `${C.danger}20`, color: C.danger, border: `1px solid ${C.danger}40` }}>Clear</button>}
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <KPICard icon={Users} label="Total Network" value={li.totalConnections?.toLocaleString()} sub={`+${li.newLast7Days} this week · +${li.newLast30Days} this month`} color={C.primary} trend={`${li.newLast30Days} new in 30d`} up />
           <KPICard icon={Target} label="ICP Matches" value={li.icpMatchCount?.toLocaleString()} sub={`${li.icpMatchRate}% of network`} color={C.success} trend="IT/Tech + Decision Maker" up />
@@ -203,9 +270,9 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
             <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Network Growth</h2>
-            <p className="text-xs mb-4" style={{ color: C.muted }}>New connections per month</p>
+            <p className="text-xs mb-4" style={{ color: C.muted }}>New connections per month {dateRange.start || dateRange.end ? `(${dateRange.start || "Start"} to ${dateRange.end || "End"})` : ""}</p>
             <ResponsiveContainer width="100%" height={240}>
-              <BarChart data={li.monthlyGrowth}>
+              <BarChart data={filteredLi.monthlyGrowth}>
                 <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
                 <XAxis dataKey="month" tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
                 <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
@@ -218,7 +285,7 @@ export default function Dashboard() {
             <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Outreach Activity</h2>
             <p className="text-xs mb-4" style={{ color: C.muted }}>Weekly invitation requests sent vs received</p>
             <ResponsiveContainer width="100%" height={240}>
-              <BarChart data={li.outreachWeekly}>
+              <BarChart data={filteredLi.outreachWeekly}>
                 <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
                 <XAxis dataKey="week" tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} />
                 <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
@@ -251,7 +318,7 @@ export default function Dashboard() {
             <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Messaging Activity</h2>
             <p className="text-xs mb-4" style={{ color: C.muted }}>Messages sent vs received per month</p>
             <ResponsiveContainer width="100%" height={240}>
-              <BarChart data={li.messageMonthly}>
+              <BarChart data={filteredLi.messageMonthly}>
                 <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
                 <XAxis dataKey="month" tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
                 <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
@@ -303,9 +370,9 @@ export default function Dashboard() {
 
         <div className="rounded-xl p-5" style={{ background: C.card, border: `1px solid ${C.border}` }}>
           <h2 className="text-lg font-semibold mb-1" style={{ color: C.text }}>Weekly Connection Growth</h2>
-          <p className="text-xs mb-4" style={{ color: C.muted }}>Last 10 weeks trend</p>
+          <p className="text-xs mb-4" style={{ color: C.muted }}>Last 10 weeks trend {dateRange.start || dateRange.end ? `(${dateRange.start || "Start"} to ${dateRange.end || "End"})` : ""}</p>
           <ResponsiveContainer width="100%" height={180}>
-            <AreaChart data={li.weeklyGrowth}>
+            <AreaChart data={filteredLi.weeklyGrowth}>
               <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
               <XAxis dataKey="week" tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} />
               <YAxis tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} />
