@@ -1,12 +1,12 @@
 {
-  "totalConnections": 9981,
-  "newLast7Days": 38,
-  "newLast30Days": 201,
-  "icpMatchCount": 1431,
-  "icpMatchRate": 14.3,
-  "decisionMakers": 5314,
-  "decisionMakerRate": 53.2,
-  "totalMessages": 29223,
+  "totalConnections": 9849,
+  "newLast7Days": 0,
+  "newLast30Days": 44,
+  "icpMatchCount": 3037,
+  "icpMatchRate": 30.8,
+  "decisionMakers": 5260,
+  "decisionMakerRate": 53.4,
+  "totalMessages": 29220,
   "messagesSent": 17222,
   "uniqueConversations": 7224,
   "totalInvitationsSent": 1316,
@@ -14,16 +14,20 @@
   "acceptanceRate30d": 65.0,
   "monthlyGrowth": [
     {
+      "month": "2025-04",
+      "connections": 64
+    },
+    {
       "month": "2025-05",
-      "connections": 104
+      "connections": 38
     },
     {
       "month": "2025-06",
-      "connections": 67
+      "connections": 33
     },
     {
       "month": "2025-07",
-      "connections": 409
+      "connections": 92
     },
     {
       "month": "2025-08",
@@ -31,128 +35,108 @@
     },
     {
       "month": "2025-09",
-      "connections": 1356
+      "connections": 355
     },
     {
       "month": "2025-10",
-      "connections": 1164
+      "connections": 549
     },
     {
       "month": "2025-11",
-      "connections": 360
+      "connections": 332
     },
     {
       "month": "2025-12",
-      "connections": 132
+      "connections": 146
     },
     {
       "month": "2026-01",
-      "connections": 494
+      "connections": 444
     },
     {
       "month": "2026-02",
-      "connections": 125
+      "connections": 257
     },
     {
       "month": "2026-03",
-      "connections": 205
+      "connections": 436
     },
     {
       "month": "2026-04",
-      "connections": 28
+      "connections": 44
     }
   ],
   "weeklyGrowth": [
     {
-      "week": "2026-01-26",
-      "connections": 51
-    },
-    {
       "week": "2026-02-02",
-      "connections": 15
+      "connections": 90
     },
     {
       "week": "2026-02-09",
-      "connections": 51
-    },
-    {
-      "week": "2026-02-16",
-      "connections": 25
-    },
-    {
-      "week": "2026-02-23",
-      "connections": 33
-    },
-    {
-      "week": "2026-03-02",
-      "connections": 33
-    },
-    {
-      "week": "2026-03-09",
-      "connections": 45
-    },
-    {
-      "week": "2026-03-16",
-      "connections": 45
-    },
-    {
-      "week": "2026-03-23",
       "connections": 70
     },
     {
+      "week": "2026-02-16",
+      "connections": 32
+    },
+    {
+      "week": "2026-02-23",
+      "connections": 60
+    },
+    {
+      "week": "2026-03-02",
+      "connections": 76
+    },
+    {
+      "week": "2026-03-09",
+      "connections": 87
+    },
+    {
+      "week": "2026-03-16",
+      "connections": 87
+    },
+    {
+      "week": "2026-03-23",
+      "connections": 173
+    },
+    {
       "week": "2026-03-30",
-      "connections": 38
+      "connections": 56
+    },
+    {
+      "week": "2026-04-06",
+      "connections": 0
     }
   ],
   "seniorityBreakdown": [
     {
-      "name": "CTO",
-      "value": 1235
-    },
-    {
-      "name": "CEO",
-      "value": 1118
-    },
-    {
-      "name": "Founder",
-      "value": 861
-    },
-    {
-      "name": "Head/VP",
-      "value": 640
-    },
-    {
-      "name": "Partner",
-      "value": 279
-    },
-    {
-      "name": "Owner",
-      "value": 116
-    },
-    {
-      "name": "COO/CFO",
-      "value": 89
+      "name": "Director+",
+      "value": 3177
     },
     {
       "name": "Manager",
-      "value": 50
+      "value": 2083
     },
     {
-      "name": "President",
-      "value": 25
+      "name": "Technical",
+      "value": 1009
+    },
+    {
+      "name": "Other",
+      "value": 3580
     }
   ],
   "topCompanies": [
     {
-      "name": "CMC Global Company Limited.",
-      "value": 41
+      "name": "CMC Global",
+      "value": 40
     },
     {
       "name": "SmartDev",
       "value": 21
     },
     {
-      "name": "Savvycom - Software Product Development",
+      "name": "Savvycom",
       "value": 17
     },
     {
@@ -160,153 +144,126 @@
       "value": 17
     },
     {
-      "name": "SOTATEK., JSC",
+      "name": "SOTATEK",
       "value": 16
     },
     {
-      "name": "NTQ Solution JSC",
+      "name": "NTQ Solution",
       "value": 16
     },
     {
-      "name": "Vivasoft Limited",
+      "name": "Soliton",
       "value": 14
     },
     {
-      "name": "MOR Software JSC",
-      "value": 11
-    },
-    {
-      "name": "Microsoft",
-      "value": 11
-    },
-    {
-      "name": "Tata Consultancy Services",
-      "value": 11
-    },
-    {
-      "name": "Google",
-      "value": 11
-    },
-    {
-      "name": "Systems Limited",
-      "value": 10
-    },
-    {
-      "name": "GRADION",
-      "value": 10
-    },
-    {
-      "name": "IBM",
-      "value": 9
-    },
-    {
-      "name": "Accenture",
-      "value": 9
+      "name": "IFS",
+      "value": 13
     }
   ],
   "outreachWeekly": [
     {
-      "week": "2026-01-26",
-      "sent": 202,
-      "received": 7
-    },
-    {
       "week": "2026-02-02",
-      "sent": 19,
-      "received": 5
+      "value": 90
     },
     {
       "week": "2026-02-09",
-      "sent": 50,
-      "received": 31
+      "value": 70
     },
     {
       "week": "2026-02-16",
-      "sent": 7,
-      "received": 9
+      "value": 32
     },
     {
       "week": "2026-02-23",
-      "sent": 81,
-      "received": 12
+      "value": 60
     },
     {
       "week": "2026-03-02",
-      "sent": 53,
-      "received": 12
+      "value": 76
     },
     {
       "week": "2026-03-09",
-      "sent": 67,
-      "received": 12
+      "value": 87
     },
     {
       "week": "2026-03-16",
-      "sent": 87,
-      "received": 17
+      "value": 87
     },
     {
       "week": "2026-03-23",
-      "sent": 96,
-      "received": 43
+      "value": 173
     },
     {
       "week": "2026-03-30",
-      "sent": 49,
-      "received": 8
+      "value": 56
+    },
+    {
+      "week": "2026-04-06",
+      "value": 0
     }
   ],
   "messageMonthly": [
     {
+      "month": "2025-04",
+      "value": 64
+    },
+    {
+      "month": "2025-05",
+      "value": 38
+    },
+    {
+      "month": "2025-06",
+      "value": 33
+    },
+    {
+      "month": "2025-07",
+      "value": 92
+    },
+    {
+      "month": "2025-08",
+      "value": 162
+    },
+    {
       "month": "2025-09",
-      "total": 1421,
-      "sent": 355,
-      "received": 1066
+      "value": 355
     },
     {
       "month": "2025-10",
-      "total": 1571,
-      "sent": 549,
-      "received": 1022
+      "value": 549
     },
     {
       "month": "2025-11",
-      "total": 823,
-      "sent": 333,
-      "received": 490
+      "value": 332
     },
     {
       "month": "2025-12",
-      "total": 424,
-      "sent": 146,
-      "received": 278
+      "value": 146
     },
     {
       "month": "2026-01",
-      "total": 808,
-      "sent": 452,
-      "received": 356
+      "value": 444
     },
     {
       "month": "2026-02",
-      "total": 481,
-      "sent": 273,
-      "received": 208
+      "value": 257
     },
     {
       "month": "2026-03",
-      "total": 843,
-      "sent": 436,
-      "received": 407
+      "value": 436
     },
     {
       "month": "2026-04",
-      "total": 80,
-      "sent": 44,
-      "received": 36
+      "value": 44
     }
   ],
   "recentICPMatches": [
+    {
+      "name": "Takuya Yamaguchi",
+      "company": "Monstarlab, Inc.",
+      "position": "Head of CEO office / SVP Corporate Strategy",
+      "connected": "05 Apr 2026",
+      "url": "https://www.linkedin.com/in/takuya-yamaguchi-787baa8b"
+    },
     {
       "name": "Mamun Morshed",
       "company": "Audacity IT Solutions Limited",
@@ -380,7 +337,7 @@
     {
       "name": "Monirul Islam",
       "company": "Advanced Software Development",
-      "position": "Ower & Director Marketng",
+      "position": "Owner & Director Marketing",
       "connected": "31 Mar 2026",
       "url": "https://www.linkedin.com/in/monirul-islam-258b5222"
     },
@@ -404,14 +361,7 @@
       "position": "CEO",
       "connected": "28 Mar 2026",
       "url": "https://www.linkedin.com/in/suhas-hiwale-2967a9"
-    },
-    {
-      "name": "David Darmstandler",
-      "company": "Datapath",
-      "position": "Co-CEO and Co-Founder",
-      "connected": "27 Mar 2026",
-      "url": "https://www.linkedin.com/in/darmstandler"
     }
   ],
-  "updatedAt": "2026-04-06"
+  "updatedAt": "2026-04-07"
 }
